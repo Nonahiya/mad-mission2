@@ -134,23 +134,25 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loading.startLoading();
                 Handler handler = new Handler();
-                handler.postDelayed(() -> {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    String name = nameInput.getEditText().getText().toString().trim();
-                    int age = Integer.parseInt(ageInput.getEditText().getText().toString().trim());
-                    String address = addressInput.getEditText().getText().toString().trim();
-                    User temp = new User(name, age, address);
+                        String name = nameInput.getEditText().getText().toString().trim();
+                        int age = Integer.parseInt(ageInput.getEditText().getText().toString().trim());
+                        String address = addressInput.getEditText().getText().toString().trim();
+                        User temp = new User(name, age, address);
 
-                    Intent intent = new Intent();
-                    intent.putExtra("newUsers", temp);
-                    setResult(9000, intent);
+                        Intent intent = new Intent();
+                        intent.putExtra("newUsers", temp);
+                        setResult(9000, intent);
 
-                    loading.dismissLoading();
+                        loading.dismissLoading();
 
-                    Toast.makeText(getBaseContext(), "Successfully added "+name.split(" ")[0]+" into the list!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "Successfully added " + name.split(" ")[0] + " into the list!", Toast.LENGTH_LONG).show();
 
-                    finish();
-
+                        finish();
+                    }
                 }, 5000);
             }
         });
